@@ -1,2 +1,4 @@
 .idea/
 replays
+*.zip
+__pycache__/
