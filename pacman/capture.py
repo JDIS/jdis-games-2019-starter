@@ -1057,7 +1057,7 @@ def runGames( agents, display, length, numGames, record, numTraining, redTeamNam
       components = {'layout': layout, 'agents': [game.Agent() for a in agents], 'actions': g.moveHistory, 'length': length, 'redTeamName': redTeamName, 'blueTeamName':blueTeamName }
       #f.close()
       g.record = pickle.dumps(components)
-      replay_id = 'replays/replay-{}'.format(datetime.datetime.now().isoformat())
+      replay_id = 'replays/replay-{}'.format(datetime.datetime.now().strftime("%Y-%m-%d %H_%M_%S"))
       print(replay_id)
       with open(replay_id,'wb') as f:
         f.write(g.record)
