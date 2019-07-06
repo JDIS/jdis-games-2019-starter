@@ -942,23 +942,7 @@ def readCommand( argv ):
     numKeyboardAgents += 1
     args['agents'][index] = agent
 
-  # Choose a layout
-  import pacman.layout as layout
-  layouts = []
-  for i in range(options.numGames):
-    if options.layout == 'RANDOM':
-      l = layout.Layout(randomLayout().split('\n'))
-    elif options.layout.startswith('RANDOM'):
-      l = layout.Layout(randomLayout(int(options.layout[6:])).split('\n'))
-    elif options.layout.lower().find('capture') == -1:
-      raise Exception( 'You must use a capture layout with capture.py')
-    else:
-      l = layout.getLayout( options.layout )
-    if l == None: raise Exception("The layout " + options.layout + " cannot be found")
-    
-    layouts.append(l)
-    
-  args['layouts'] = layouts
+  args['layout'] = options.layout
   args['length'] = options.time
   args['numGames'] = options.numGames
   args['numTraining'] = options.numTraining
