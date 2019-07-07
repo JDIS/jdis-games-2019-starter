@@ -10,7 +10,7 @@ def parse_args():
     parser.add_argument("--blueBot", type=str, help='Module name of the blue bot', default="MyBot")
     parser.add_argument("--layout", type=str, help='Name of the layout (in the layouts directory or "random"', default="RANDOM")
     parser.add_argument("--numGames", type=int, help='Number of games to be played', default=1)
-    parser.add_argument("--gameLength", type=int, help='Length of a game', default=1000)
+    parser.add_argument("--gameLength", type=int, help='Length of a game', default=1200)
     parser.add_argument('--seed', type=str, help='Seed to set randomness', default=None)
     return parser.parse_args()
 
