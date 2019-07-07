@@ -33,7 +33,7 @@ if __name__ == '__main__':
         'redTeamName': args.redBot,
         'blueTeamName': args.blueBot,
         'muteAgents': False,
-        'catchExceptions': False,
+        'catchExceptions': True,
         'seed': args.seed,
         'layout': args.layout
     }
