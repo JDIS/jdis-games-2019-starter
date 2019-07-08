@@ -2,3 +2,4 @@
 replays
 *.zip
 __pycache__/
+.cenv

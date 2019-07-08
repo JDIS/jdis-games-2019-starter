@@ -1070,6 +1070,9 @@ def runGames( agents, display, length, numGames, record, numTraining, redTeamNam
           def pause(self):
             pass
           def draw(self, state):
+            pass
+          def update(self, state):
+            super().update(state)
             states.append(str(state))
           def finish(self):
             json_components = {'history': states, 'redTeamName': redTeamName, 'blueTeamName': blueTeamName}
