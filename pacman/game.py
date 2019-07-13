@@ -566,6 +566,7 @@ class Game:
 
     def __init__( self, agents, display, rules, startingIndex=0, muteAgents=False, catchExceptions=False ):
         self.agentCrashed = False
+        self.agentCrashedId = None
         self.agents = agents
         self.display = display
         self.rules = rules
@@ -591,6 +592,7 @@ class Game:
         if not quiet: traceback.print_exc()
         self.gameOver = True
         self.agentCrashed = True
+        self.agentCrashedId = agentIndex
         self.rules.agentCrash(self, agentIndex)
 
     OLD_STDOUT = None

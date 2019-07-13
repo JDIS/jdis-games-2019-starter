@@ -1015,6 +1015,8 @@ def replayGame( layout, agents, actions, display, length, redTeamName, blueTeamN
       rules.process(state, game)
 
     display.finish()
+    if 'customfinish' in dir(display):
+      display.customfinish(state)
 
 def runGames( agents, display, length, numGames, record, numTraining, redTeamName, blueTeamName, muteAgents=False, catchExceptions=False, seed=None, layout='RANDOM' ):
   if seed is not None:
@@ -1082,8 +1084,11 @@ def runGames( agents, display, length, numGames, record, numTraining, redTeamNam
           def update(self, state):
             super().update(state)
             states.append(str(state))
-          def finish(self):
-            json_components = {'history': states, 'redTeamName': redTeamName, 'blueTeamName': blueTeamName}
+          def customfinish(self, state):
+            score = state.data.score
+            score = -1 if g.agentCrashedId == 0 or g.agentCrashedId == 2 else 1
+
+            json_components = {'history': states, 'redTeamName': redTeamName, 'blueTeamName': blueTeamName, 'score': score}
             json.dump(json_components, f)
 
         replayGame(layout, agents, g.moveHistory, js_recorded(), length, redTeamName, blueTeamName)
