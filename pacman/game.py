@@ -20,7 +20,7 @@
 # John DeNero (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # For more info, see http://inst.eecs.berkeley.edu/~cs188/sp09/pacman.html
 
-import time, os
+import copy, time, os
 import traceback
 import sys
 from typing import List, Tuple
@@ -90,7 +90,7 @@ class _MetaCosts(type):
 
 class Costs(object, metaclass=_MetaCosts):
     STAY_COST = 0 # Direction.STOP or FROZEN
-    MOVE_COST = .05
+    MOVE_COST = .00
     JUMP_COST = .25
     FREEZE_COST = 1
 
@@ -177,7 +177,7 @@ class AgentState:
 
     def copy( self ):
         state = AgentState( self.start, self.isPacman )
-        state.configuration = self.configuration
+        state.configuration = copy.deepcopy(self.configuration)
         state.scaredTimer = self.scaredTimer
         state.numCarrying = self.numCarrying
         state.numReturned = self.numReturned
@@ -674,6 +674,7 @@ class Game:
                         try:
                             start_time = time.time()
                             observation = timed_func(self.state.deepCopy())
+
                         except TimeoutFunctionException:
                             skip_action = True
                         move_time += time.time() - start_time

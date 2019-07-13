@@ -74,6 +74,16 @@ JUMP_TIME = 30
 def noisyDistance(pos1: int, pos2: int) -> int:
   return int(manhattanDistance(pos1, pos2) + random.choice(SONAR_NOISE_VALUES))
 
+def noisyPos(pos: Tuple[int, int], layout: Grid) -> Tuple[int, int]:
+    height, width = layout.height, layout.width
+    x,y = pos
+    x = max(0, min(width-1, int(x + random.choice(SONAR_NOISE_VALUES))))
+    y = max(0, min(height-1, int(y + random.choice(SONAR_NOISE_VALUES))))
+    while layout.walls[x][y]:
+        x = max(0, min(width-1, int(x + random.choice(SONAR_NOISE_VALUES))))
+        y = max(0, min(height-1, int(y + random.choice(SONAR_NOISE_VALUES))))
+    return x,y
+
 ###################################################
 # YOUR INTERFACE TO THE PACMAN WORLD: A GameState #
 ###################################################
@@ -283,10 +293,8 @@ class GameState:
     for enemy in otherTeam:
       seen = False
       enemyPos = state.getAgentPosition(enemy)
-      for teammate in team:
-        if manhattanDistance(enemyPos, state.getAgentPosition(teammate)) <= SIGHT_RANGE:
-          seen = True
-      if not seen: state.data.agentStates[enemy].configuration = None
+      pos = state.data.agentStates[enemy].configuration.pos
+      state.data.agentStates[enemy].configuration.pos = noisyPos(pos, self.data.layout)
     return state
 
   def __eq__( self, other ):
