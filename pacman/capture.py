@@ -76,12 +76,12 @@ def noisyDistance(pos1: int, pos2: int) -> int:
 
 def noisyPos(pos: Tuple[int, int], layout: Grid) -> Tuple[int, int]:
     height, width = layout.height, layout.width
-    x,y = pos
-    x = max(0, min(width-1, int(x + random.choice(SONAR_NOISE_VALUES))))
-    y = max(0, min(height-1, int(y + random.choice(SONAR_NOISE_VALUES))))
+    xb,yb = pos
+    x = max(0, min(width-1, int(xb + random.choice(SONAR_NOISE_VALUES))))
+    y = max(0, min(height-1, int(yb + random.choice(SONAR_NOISE_VALUES))))
     while layout.walls[x][y]:
-        x = max(0, min(width-1, int(x + random.choice(SONAR_NOISE_VALUES))))
-        y = max(0, min(height-1, int(y + random.choice(SONAR_NOISE_VALUES))))
+        x = max(0, min(width-1, int(xb + random.choice(SONAR_NOISE_VALUES))))
+        y = max(0, min(height-1, int(yb + random.choice(SONAR_NOISE_VALUES))))
     return x,y
 
 ###################################################
