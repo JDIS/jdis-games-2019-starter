@@ -1086,7 +1086,8 @@ def runGames( agents, display, length, numGames, record, numTraining, redTeamNam
             states.append(str(state))
           def customfinish(self, state):
             score = state.data.score
-            score = -1 if g.agentCrashedId == 0 or g.agentCrashedId == 2 else 1
+            if g.agentCrashed:
+              score = -1 if g.agentCrashedId == 0 or g.agentCrashedId == 2 else 1
 
             json_components = {'history': states, 'redTeamName': redTeamName, 'blueTeamName': blueTeamName, 'score': score}
             json.dump(json_components, f)
