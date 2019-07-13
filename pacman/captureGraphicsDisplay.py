@@ -280,7 +280,6 @@ class PacmanGraphics:
   def update(self, newState):
     agentIndex = newState._agentMoved
     agentState = newState.agentStates[agentIndex]
-
     if self.agentImages[agentIndex][0].isPacman != agentState.isPacman or \
        self.unfreeze(self.agentImages[agentIndex][0], agentState):
         self.swapImages(agentIndex, agentState)
@@ -288,10 +287,11 @@ class PacmanGraphics:
         self.freezeImage(agentIndex, agentState)
 
     prevState, prevImage = self.agentImages[agentIndex]
-    if agentState.isPacman:
-      self.animatePacman(agentState, prevState, prevImage)
-    else:
-      self.moveGhost(agentState, agentIndex, prevState, prevImage)
+    if agentState.frozenTimer == 0:
+      if agentState.isPacman:
+        self.animatePacman(agentState, prevState, prevImage)
+      else:
+        self.moveGhost(agentState, agentIndex, prevState, prevImage)
     self.agentImages[agentIndex] = (agentState, prevImage)
 
     if newState._foodEaten != None:
