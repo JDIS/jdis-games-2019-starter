@@ -653,6 +653,9 @@ class Game:
                     except Exception as data:
                         self._agentCrash(i, quiet=False)
                         self.unmute()
+                        print("BOT CRASHED AT REGISTER INITIAL STATE")
+                        import traceback
+                        traceback.print_exc(data)
                         return
                 else:
                     agent.registerInitialState(self.state.deepCopy())
@@ -733,6 +736,9 @@ class Game:
                 except Exception as data:
                     self._agentCrash(agentIndex)
                     self.unmute()
+                    print("BOT CRASHED AT ACTION")
+                    import traceback
+                    traceback.print_exc(data)
                     return
             else:
                 action = agent.getAction(observation)
